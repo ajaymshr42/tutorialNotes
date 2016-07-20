@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head>
+	<title>Test Select Multiple</title>
+	
+<link rel="stylesheet" href="angular-material.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="angular.min.js"></script>
+  <script src="angular-ui-router.min.js"></script>
+  <script src="ngStorage.js"></script>
+  <script src="angular-animate.min.js"></script>
+  <script src="angular-aria.min.js"></script>
+  <script src="angular-messages.min.js"></script>
+  <script src="angular-material.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="testCtrl">
+	<form ng-submit="test(basic)">
+		<div layout="row"  >
+			<md-input-container flex  md-no-float class="md-block" >
+				<md-select multiple ng-model="basic.loc" aria-label="location" ng-model="abc" placeholder="Enter location">
+		          	<md-option ng-repeat="location in locations" value="{{location}}">
+		            {{location.name}}
+		          </md-option>
+		        </md-select>
+			</md-input-container>
+		</div>
+		<md-button type="submit">Submit</md-button>
+
+	</form>
+
+</body>
+</html>

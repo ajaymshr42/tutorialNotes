@@ -1,0 +1,18 @@
+/*
+
+  //getting list of users with id and name in users[] from adminChatList
+  
+  $scope.users=[];
+  db.ref('presence/adminChatLists/'+$scope.aid).on("value",function(snapshot){
+    angular.forEach(snapshot.val(),function(value,key){
+        db.ref('/users/data/'+key).once("value",function(snap){
+            var abc={
+              id:key,
+              name:snap.val().name
+            };
+            $scope.users.push(abc);
+        });
+    });
+  });
+
+  */

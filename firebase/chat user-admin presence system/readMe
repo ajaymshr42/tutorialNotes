@@ -1,0 +1,11 @@
+notes about system
+
+
+there is a user system which tracks its online status and also list of admins available for chat on continous basis
+if any admin is found available (first or at any time) then it is assigned to user and added to user presence list and also
+added to admin presence with user id true
+
+
+same is done at admin side , with a slight change in procedure as admin will listen to just which user is assigned to him
+by checking each users presence list for mark of admin presence as true
+

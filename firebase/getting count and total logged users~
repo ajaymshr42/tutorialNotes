@@ -1,0 +1,55 @@
+
+
+
+
+.info/connected will only return information about whether the current client is connected or not. In order to maintain a presence count, you'll need to create a counter by storing presence information for each user and utilizing setOnDisconnect(). For example:
+
+var listRef = new Firebase("https://<url>.firebaseio.com/presence/");
+var userRef = listRef.push();
+
+// Add ourselves to presence list when online.
+var presenceRef = new Firebase("https://<url>.firebaseio.com/.info/connected");
+presenceRef.on("value", function(snap) {
+  if (snap.val()) {
+    // Remove ourselves when we disconnect.
+    userRef.onDisconnect().remove();
+
+    userRef.set(true);
+  }
+});
+
+// Number of online users is the number of objects in the presence list.
+listRef.on("value", function(snap) {
+  console.log("# of online users = " + snap.numChildren());
+});    
+
+
+
+dont refer the links of firebase they are old and depricated use this instead with same logic
+
+
+
+
+.info/connected will only return information about whether the current client is connected or not. In order to maintain a presence count, you'll need to create a counter by storing presence information for each user and utilizing setOnDisconnect(). For example:
+
+var listRef = new Firebase("https://<url>.firebaseio.com/presence/");
+var userRef = listRef.push();
+
+// Add ourselves to presence list when online.
+var presenceRef = new Firebase("https://<url>.firebaseio.com/.info/connected");
+presenceRef.on("value", function(snap) {
+  if (snap.val()) {
+    // Remove ourselves when we disconnect.
+    userRef.onDisconnect().remove();
+
+    userRef.set(true);
+  }
+});
+
+// Number of online users is the number of objects in the presence list.
+listRef.on("value", function(snap) {
+  console.log("# of online users = " + snap.numChildren());
+});    
+
+
+
