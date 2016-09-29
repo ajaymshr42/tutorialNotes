@@ -1,0 +1,73 @@
+first of all check whether python virtual environment is working or not
+ if not then install by typing
+
+
+sudo apt-get install python-virtualenv
+
+then do 
+
+virtualenv  rest-api
+
+source rest-api/bin/activate
+
+after this you will be inside a virtual environment then create desired directory like
+
+mkdir ~/rest-app
+
+cd ~/rest-app
+
+
+
+now create your sample file here for testing purpose 
+
+
+from flask import Flask, request
+from flask_restful import Resource, Api
+from sqlalchemy import create_engine
+from json import dumps
+
+#Create a engine for connecting to SQLite3.
+#Assuming salaries.db is in your app root folder
+
+app = Flask(__name__)
+api = Api(app)
+
+class Departments_Meta(Resource):
+    def get(self):
+        return {'departments': ['a','b','c']}
+
+
+api.add_resource(Departments_Meta, '/departments')
+
+if __name__ == '__main__':
+     app.run()
+
+paste this code into some file
+
+
+now you will have to install required libraries swhich are 
+
+pip install flask
+pip install flask-restful
+pip install sqlalchemy
+
+
+
+finally run your python file using python command
+
+
+That’s it. Your salary API is up and running now on localhost , port 5000. There are two rules we defined in the API. One is to get details of all departments available and second is to get employee full detail, who is working in a particular department.
+
+So now go to
+
+http://localhost:5000/departments
+
+
+
+that's it api is working 
+
+
+now this is setting up the api in virtual environment which do not last long
+
+next time we will set it up at live environment
+
