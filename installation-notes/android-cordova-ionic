@@ -1,0 +1,80 @@
+android-intallation
+
+download android studio and extract in desired folder for installation.......
+finally comes the most exhaustive and hectic part adding it to the environment path variables 
+
+i spent almost two days searching for the right way to do it and finally got the answer to my question using .bashrc file
+
+open .bashrc file in home using your favorite text editor i used nano
+
+execute 
+$nano .bashrc
+
+
+this opens your .bashrc file , remember not to mess with it too much because this may cause some terrible problems in your system
+
+just add this two simple lines at the end or at begining or anywhere but not inside some control flow structure already processing some function 
+
+export ANDROID_HOME=/home/'username'/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+in this $HOME can be added to indicate /home/'username' in first line 
+remember you have to give the path where you installed android , like i installed in my home directory so i provided that path
+
+also check whether android-sdk is saved in this Android/Sdk
+if not check the directory name and provide that name for the export in .bashrc
+
+once you are done with this steps you can execute android command from anywhere
+
+now stepping to ionic !
+
+
+cd Android
+cd Sdk
+cd tools
+android
+
+and update the platform tools, build tools and sdk platform for the latest version of android
+
+
+ionic-intallation
+
+you should have npm installer installed in order to install the ionic framework in your system
+
+$ sudo npm install -g ionic
+
+your can start a app named 'todo' with initially as blank in desired directory using following command(you can also initialize your app as tab or others , see ionicframework official website for this)
+
+$ ionic start todo blank
+
+checkout the contents of todo app (see directories and have a pretty gasp of what is where)
+
+$ cd todo && ls
+
+
+adding platforms
+
+
+$ ionic platform add ios
+
+$ ionic platform add android
+
+
+emulating in virtual devices
+
+$ ionic build ios
+$ ionic emulate ios
+
+$ ionic build android
+$ ionic emulate android
+
+
+
+Note : your should have cordova telemetry on in order to emulate and build application fro different platforms while using cordova plugins
+run this command
+
+ cordova telemetry on
+
+
+
+
