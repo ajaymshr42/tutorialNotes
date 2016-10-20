@@ -1,1 +1,49 @@
 
+https://github.com/aws/aws-sdk-php
+
+
+https://packagist.org/
+
+https://www.youtube.com/watch?v=HDxCDdZFh9g
+
+http://docs.aws.amazon.com/aws-sdk-php/v2/guide/credentials.html
+
+http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/credentials.html#credential-provider
+
+http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/basic-usage.html
+
+
+sample code looks like somethiing this
+
+
+
+<?php
+
+error_reporting (E_ALL);
+ini_set('display_errors', 1);
+require_once '/var/www/html/s3/vendor/autoload.php';
+
+
+use Aws\S3\S3Client;
+
+// Instantiate the S3 client with your AWS credentials
+$s3 = S3Client::factory(array(
+	'region'=>'us-east-1',
+	'version'=>'latest',
+    'credentials' => array(
+        'key'    => 'YOUR_AWS_ACCESS_KEY_ID',
+        'secret' => 'YOUR_AWS_SECRET_ACCESS_KEY',
+    )
+));
+
+$result = $s3->listBuckets();
+
+foreach ($result['Buckets'] as $bucket) {
+    echo $bucket['Name'] . "\n";
+}
+?>
+
+apart from this they say that ~/.aws/credentials contains default ccredentials where you can save your amazon aws s3 credentials and 
+then access through sdk whatever you want only this method works me because it needs nothing but the fatcory method
+
+
