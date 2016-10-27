@@ -2,15 +2,7 @@
 	require_once '/var/www/html/s3/vendor/autoload.php';
 	use Aws\S3\S3Client;
 
-	$s3 = S3Client::factory(array(
-		'region'=>'us-east-1',
-		'version'=>'latest',
-	    'credentials' => array(
-	        'key'    => 'AKIAIIBKQMF4Y5QEQM4A',
-	        'secret' => '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',
-	    )
-	));
-
+	$s3 = S3Client::factory(array(keys));
 	
 	$collector_urls=array(
 			'https://lists.blocklist.de/lists/bruteforcelogin.txt',
