@@ -33,3 +33,6 @@ ssh -i ~/aws_spark.pem hadoop@$dns crontab hadoop
 
 
 
+ match=$(yarn application -list | sed 's/[^0-9]*//g') 
+ #number of processes running on cluster 
+
