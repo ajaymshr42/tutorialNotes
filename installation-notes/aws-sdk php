@@ -20,7 +20,8 @@ http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.htm
 
 use following to make the aws workable inside the directory and use credentials
 
-curl -sS https://getcomposer.org/installer | php
+ sudo curl -sS https://getcomposer.org/installer | sudo php5
+
 
 php composer.phar require aws/aws-sdk-php
 
