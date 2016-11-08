@@ -1,3 +1,5 @@
+http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html
+
 
 https://github.com/aws/aws-sdk-php
 
@@ -14,6 +16,17 @@ http://docs.aws.amazon.com/aws-sdk-php/v3/guide/guide/credentials.html#credentia
 http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/basic-usage.html
 
 http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html
+
+
+use following to make the aws workable inside the directory and use credentials
+
+curl -sS https://getcomposer.org/installer | php
+
+php composer.phar require aws/aws-sdk-php
+
+<?php
+require 'vendor/autoload.php';
+
 
 
 sample code looks like somethiing this
