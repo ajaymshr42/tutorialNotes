@@ -1,0 +1,15 @@
+#installign django into linux 
+
+install easy_install into your computer or check for version
+
+got o site bootstrap.pypa.io
+
+download ez_setup.py
+
+install using python 
+
+then run
+
+easy_install django 
+
+to install django latest verson into your computer
