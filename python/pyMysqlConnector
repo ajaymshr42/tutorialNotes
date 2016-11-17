@@ -1,0 +1,17 @@
+pip install mysql-connector
+
+
+
+import mysql.connector
+
+config = {
+  'user': 'bigdata_user',
+  'password': 'u4C94Vse7RGGKtDJ',
+  'host': 'reportdb2.nlpcaptcha.in',
+  'database': 'nlp_live table',
+  'raise_on_warnings': True,
+}
+
+cnx = mysql.connector.connect(**config)
+
+cnx.close()
