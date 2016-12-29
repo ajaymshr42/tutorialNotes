@@ -55,3 +55,20 @@ http://54.169.60.43:9999/tree?token=0216fce120e42a48486941205efa3d5f32ec99df54b8
 ip:port/tree?token=$token
 
 #remember this procedure runs it as public to make it private add hash key to password
+
+
+#find file pyspark on system using 
+
+which pyspark
+
+
+#now edit pyspark file and add two line 
+
+PYSPARK_DRIVER_PYTHON="jupyter"
+PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+
+# now execute from command line 
+PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark
+
+
+# you are good to go using pyspark as instance inside jupyter notebook in browser
