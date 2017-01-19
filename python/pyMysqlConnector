@@ -15,3 +15,13 @@ config = {
 cnx = mysql.connector.connect(**config)
 
 cnx.close()
+
+
+
+
+#sql alchemy method
+
+
+from sqlalchemy import create_engine
+engine = create_engine('mysql+pymysql://bigdata_user:dbphuv8qeB28JTBW@127.0.0.1/nlp_live')
+connection = engine.connect()
