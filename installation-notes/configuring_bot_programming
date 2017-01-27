@@ -74,6 +74,10 @@ sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
 
+#or simply just put it crhomedriver &&& geckodriver file inside 
 
+/usr/local/bin 
+
+and they will automatically will start working ,,,,,, you dont have to worry about it
 
 
