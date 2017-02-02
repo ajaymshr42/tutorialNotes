@@ -1,0 +1,9 @@
+
+#link to recognize best settings and the cluster configurations
+https://github.com/JustGiving/raven-aws-emr-spark-jupyter
+
+
+
+#reference for best performance cluster setup
+http://stackoverflow.com/questions/30435610/spark-which-instance-type-is-preferred-for-aws-emr-cluster
+
