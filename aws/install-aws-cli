@@ -1,0 +1,5 @@
+sudo apt-get update
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python2.7 get-pip.py
+pip install awscli
+pip install --upgrade awscli
