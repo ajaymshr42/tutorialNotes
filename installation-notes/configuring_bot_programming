@@ -81,3 +81,11 @@ sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 and they will automatically will start working ,,,,,, you dont have to worry about it
 
 
+#also to maintain good list of fake proper user agent strings to be set inside the driver use fake_useragent
+#refer link 
+https://pypi.python.org/pypi/fake-useragent
+pip install fake_useragent
+
+
+
+
