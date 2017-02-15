@@ -1,1 +1,54 @@
 http://www.tech-dojo.org/#!/articles/562f996d3b33ed0b005d04ff
+
+bower install ionic-datepicker --save --allow-root
+
+<script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+
+
+angular.module('mainModuleName', ['ionic', 'ionic-datepicker']){
+
+Use the format below in your template's corresponding controller
+
+$scope.datepickerObject = {
+      titleLabel: 'Title',  //Optional
+      todayLabel: 'Today',  //Optional
+      closeLabel: 'Close',  //Optional
+      setLabel: 'Set',  //Optional
+      setButtonType : 'button-assertive',  //Optional
+      todayButtonType : 'button-assertive',  //Optional
+      closeButtonType : 'button-assertive',  //Optional
+      inputDate: new Date(),    //Optional
+      mondayFirst: true,    //Optional
+      disabledDates: disabledDates, //Optional
+      weekDaysList: weekDaysList,   //Optional
+      monthList: monthList, //Optional
+      templateType: 'popup', //Optional
+      showTodayButton: 'true', //Optional
+      modalHeaderColor: 'bar-positive', //Optional
+      modalFooterColor: 'bar-positive', //Optional
+      from: new Date(2012, 8, 2),   //Optional
+      to: new Date(2018, 8, 25),    //Optional
+      callback: function (val) {    //Mandatory
+        datePickerCallback(val);
+      }
+    };
+
+
+5. $scope.datepickerObject is the main object, that we need to pass to the directive.
+
+6. callback (Mandatory) : This is the callback function, which will get the selected date in to the controller. You can define this function as follows.
+
+var datePickerCallback = function (val) {
+  if (typeof(val) === 'undefined') {
+    console.log('No date selected');
+  } else {
+    console.log('Selected date is : ', val)
+  }
+};
+
+Then use the format below in your template / html file
+
+
+<ionic-datepicker input-obj="datepickerObject">
+  <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+</ionic-datepicker>
