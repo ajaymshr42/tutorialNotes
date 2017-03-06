@@ -16,3 +16,9 @@ awk -F, 'NR > 1{ print "SET", "\"employee_"$1"\"", "\""$0"\"" }' file.csv | redi
 
 # bulk add
 http://ignlg.github.io/english/2014/04/08/easy-redis-mass-insertion-with-list-of-commands.html
+
+
+#py-redis tutorials
+
+
+https://pypi.python.org/pypi/redis
