@@ -10,3 +10,6 @@ http://stackoverflow.com/questions/30435610/spark-which-instance-type-is-preferr
 #setup details for more configurations
 http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark-configure.html
 
+py4j .............. connection and socket issues with Jupyter Notebook, WorkFlow Manager Integration Nec
+
+https://www.py4j.org/getting_started.html
