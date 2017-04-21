@@ -1,7 +1,9 @@
 To Execute Pyspark Application Using Step inside Create Cluster command in emr use 
 
+auto terminate here makes cluster transient and terminates cluster automatically after successfull execution of last step
 
 aws emr create-cluster 
+--auto-terminate
 --auto-scaling-role EMR_AutoScaling_DefaultRole 
 --applications Name=Hadoop Name=Hive Name=Pig Name=Hue Name=Zeppelin Name=Ganglia Name=Tez Name=Presto Name=Spark 
 --bootstrap-actions '[{"Path":"s3://aws-bigdata-blog/artifacts/aws-blog-emr-jupyter/install-jupyter-emr5.sh","Args":["--r,--julia,--toree,--torch,--ruby,--ds-packages,--ml-packages,--python-packages,'ggplot","nilearn',--port,8880,--password,jupyter,--jupyterhub,--jupyterhub-port,8001,--cached-install"],"Name":"Custom action"}]' 
