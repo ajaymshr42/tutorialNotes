@@ -1,0 +1,16 @@
+To Execute Pyspark Application Using Step inside Create Cluster command in emr use 
+
+
+aws emr create-cluster 
+--auto-scaling-role EMR_AutoScaling_DefaultRole 
+--applications Name=Hadoop Name=Hive Name=Pig Name=Hue Name=Zeppelin Name=Ganglia Name=Tez Name=Presto Name=Spark 
+--bootstrap-actions '[{"Path":"s3://aws-bigdata-blog/artifacts/aws-blog-emr-jupyter/install-jupyter-emr5.sh","Args":["--r,--julia,--toree,--torch,--ruby,--ds-packages,--ml-packages,--python-packages,'ggplot","nilearn',--port,8880,--password,jupyter,--jupyterhub,--jupyterhub-port,8001,--cached-install"],"Name":"Custom action"}]' 
+--ec2-attributes '{"KeyName":"aws_spark","InstanceProfile":"EMR_EC2_DefaultRole","AvailabilityZone":"ap-southeast-1b","EmrManagedSlaveSecurityGroup":"sg-2ea63b7b","EmrManagedMasterSecurityGroup":"sg-2fa63b7a"}' 
+--service-role EMR_DefaultRole 
+--enable-debugging 
+--release-label emr-5.4.0 
+--log-uri 's3n://aws-logs-993183203787-ap-southeast-1/elasticmapreduce/' 
+--steps '[{"Args":["spark-submit","/home/hadoop/pb_integrated_complete_daily_preprocessing.py"],"Type":"CUSTOM_JAR","ActionOnFailure":"CONTINUE","Jar":"command-runner.jar","Properties":"","Name":"Command Runner"},{"Args":["aws","s3","cp","s3://nlplive.humanindex.data/codes/pb_integrated_complete_daily_preprocessing.py","/home/hadoop/"],"Type":"CUSTOM_JAR","ActionOnFailure":"CONTINUE","Jar":"command-runner.jar","Properties":"","Name":"Command Runner"}]' 
+--name '2xClusters X 2 For Data Processing' 
+--instance-groups '[{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"m3.xlarge","Name":"Master - 1"},{"InstanceCount":2,"InstanceGroupType":"CORE","InstanceType":"c3.2xlarge","Name":"Core - 2"}]' 
+--scale-down-behavior TERMINATE_AT_INSTANCE_HOUR --region ap-southeast-1
