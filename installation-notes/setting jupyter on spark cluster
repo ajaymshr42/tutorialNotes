@@ -72,3 +72,30 @@ PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark
 
 
 # you are good to go using pyspark as instance inside jupyter notebook in browser
+
+
+
+# often while running the Jupyter Notebook it gets broken with message
+Write Error : Broken Pipe
+
+TO prevent this you can change the ssh configuration so that it keeps that jupyter notebook alive set
+
+For the client, edit your ~/.ssh/config (or /etc/ssh/ssh_config) file as follow:
+
+Host *
+  TCPKeepAlive yes
+  ServerAliveInterval 120
+  
+  
+For the server, edit your /etc/ssh/sshd_config as:
+
+ClientAliveInterval 600
+ClientAliveCountMax 0
+
+
+If this does not works 
+Try creating the file:
+
+~/.ssh/config and add the configuration
+
+
