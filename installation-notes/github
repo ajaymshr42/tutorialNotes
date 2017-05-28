@@ -5,6 +5,9 @@ git add *
 git commit -m "some init msg"
 
 
+# adding ssh keys to your github
+
+
 
 
 # using multiple accounts to same machine to use github
