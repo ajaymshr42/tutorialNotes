@@ -39,6 +39,9 @@ c.NotebookApp.ip = '*'
 c.NotebookApp.port = 9999
 c.NotebookApp.open_browser = False
 
+# permanantly remove the pain of --allow-root option
+c.NotebookApp.allow_root = True
+
 #optional settings
 c.NotebookApp.certfile = u'/absolute/path/to/your/certificate/mycert.pem'
 c.NotebookApp.password = u'sha1:bcd259ccf...[your hashed password here]'
