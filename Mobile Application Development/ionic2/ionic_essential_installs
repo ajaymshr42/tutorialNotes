@@ -1,0 +1,23 @@
+for bower commands use 
+
+--save --allow-root at the end to execute command successfully and to be able to use 
+
+Install the Ionic Toast for Toasting messages process
+
+https://github.com/rajeshwarpatlolla/ionic-toast
+
+
+floating menu and buttons 
+
+https://github.com/pregiotek/ion-floating-menu
+
+
+npm i datepicker-ionic2 --save
+npm install firebase
+npm install ionic-toast
+
+
+find config.xml to edit details about your app in root directory fo your app to change app description
+
+ <icon src="res/android/pkLogo.png" platform="android" width="57" height="57" density="mdpi" />
+

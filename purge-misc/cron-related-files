@@ -1,0 +1,41 @@
+adding files to be a cron data file 
+
+#write out current crontab
+
+crontab -l > mycron
+
+#echo new cron into cron file
+
+echo "00 09 * * 1-5 echo hello" >> mycron
+
+#install new cron file
+
+crontab mycron
+
+rm mycron
+
+
+
+
+
+
+on fly single command technique
+
+crontab -l | { cat; echo "0 0 0 0 0 some entry"; } | crontab -
+
+
+overwriting to existing cron files
+
+
+
+
+EDIT (fixed overwriting):
+
+cat <(crontab -l) <(echo "1 2 3 4 5 scripty.sh") | crontab -
+
+
+
+copying crontask over ssh
+
+echo "$CRON_CONTENTS" | ssh username@server crontab 
+

@@ -1,0 +1,101 @@
+# example ip started with 54.169.60.43
+
+
+
+pip install ipython
+pip install jupyter
+
+
+# in hdfs we dont have direct manual entries inside of it for installation so you have to through linking process manually
+
+#check the jupyter files inside
+
+cd /usr/local/bin
+
+
+ln jupyter /usr/bin/
+ln jupyter-notebook /usr/bin/
+
+# better do it at once
+
+ln jupyter* /usr/bin/
+
+#generate configurations for jupyter notebook
+jupyter notebook --generate-config
+
+#edit configuration file for adding custom settings
+#bydefault it runs only for locahost @ 8888
+nano ~/.jupyter/jupyter_notebook_config.py
+
+
+# following settings to run it everywhere
+
+
+c = get_config()
+
+# Notebook config
+
+c.NotebookApp.ip = '*'
+c.NotebookApp.port = 9999
+c.NotebookApp.open_browser = False
+
+#optional settings
+c.NotebookApp.certfile = u'/absolute/path/to/your/certificate/mycert.pem'
+c.NotebookApp.password = u'sha1:bcd259ccf...[your hashed password here]'
+# It is a good idea to put it on a known, fixed port
+
+
+# finally execute 
+jupyter notebook 
+
+#and open in your browser as 
+http://54.169.60.43:9999/tree?token=0216fce120e42a48486941205efa3d5f32ec99df54b8ce09
+
+
+ip:port/tree?token=$token
+
+#remember this procedure runs it as public to make it private add hash key to password
+
+
+#find file pyspark on system using 
+
+which pyspark
+
+
+#now edit pyspark file and add two line 
+
+PYSPARK_DRIVER_PYTHON="jupyter"
+PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+
+# now execute from command line 
+PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark
+
+
+# you are good to go using pyspark as instance inside jupyter notebook in browser
+
+
+
+# often while running the Jupyter Notebook it gets broken with message
+Write Error : Broken Pipe
+
+TO prevent this you can change the ssh configuration so that it keeps that jupyter notebook alive set
+
+For the client, edit your ~/.ssh/config (or /etc/ssh/ssh_config) file as follow:
+
+Host *
+  TCPKeepAlive yes
+  ServerAliveInterval 120
+  
+  
+For the server, edit your /etc/ssh/sshd_config as:
+
+ClientAliveInterval 600
+ClientAliveCountMax 0
+
+
+If this does not works 
+Try creating the file:
+
+~/.ssh/config and add the configuration
+
+

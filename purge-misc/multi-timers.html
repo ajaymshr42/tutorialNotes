@@ -1,0 +1,98 @@
+<html>
+<head>
+<script >
+
+
+var ad={};
+
+// function Timer(TimerID){
+//     var oop=this;
+//     this.tid=TimerID;
+// 	this.TotalSeconds = 0;
+// 	timerobj=null;
+
+// 	this.start=function(){
+// 		timerobj=setInterval(function(){
+// 			oop.tick();
+// 			console.log(oop.tid+"="+oop.TotalSeconds);
+// 		},1000)
+// 	}
+
+// 	this.stop=function(){
+// 		clearInterval(timerobj);
+// 	}
+
+// }
+
+// Timer.prototype={
+
+// 	tick:function(){
+// 		var oop=this;
+// 		this.TotalSeconds += 1;
+// 	},
+// 	toc:function(){
+// 		clearInterval();
+// 	}
+
+// }
+
+
+function Timer(fn,id) {
+    this.time=1;
+    this.timerObj = setInterval(function(){fn(id,this)}, 1000);
+    this.stop = function() {
+        if (this.timerObj) {
+            clearInterval(this.timerObj);
+            timerObj = null;
+        }
+        return this;
+    }
+    this.start = function() {
+        if (!this.timerObj) {
+            this.stop();
+            this.timerObj = setInterval(function(){fn(id,this)}, 1000);
+        }
+        return this;
+    }
+}
+var i=1;
+function incrementor(id,tt){
+	tt.time+=1;
+	console.log(id+"="+i+++'='+tt.time);
+};
+
+ad['timer1'] = new Timer(incrementor,"timer1");
+ad['timer2'] = new Timer(incrementor,'timer2');
+
+ad['timer1'].start();
+ad['timer2'].start();
+setTimeout(function(){
+	console.log(ad['timer1'].stop());
+	console.log(ad['timer2'].stop());
+},5000);
+
+
+
+
+
+</script>
+</head>
+<body>
+<p id='timer1'></p>
+<p id='timer2'></p>
+<script type="text/javascript">
+
+// var timer1=new Timer("timer1", 0);
+// var timer2=new Timer("timer2", 0);
+// timer1.start();
+// timer2.start();
+
+// setTimeout(function(){
+// 	timer1.stop();
+// 	timer2.stop();
+// },5000)
+
+
+</script>
+</body>
+</html>
