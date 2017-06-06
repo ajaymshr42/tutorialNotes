@@ -1,0 +1,9 @@
+git clone https://github.com/nrk/predis.git
+
+
+require 'Predis/Autoloader.php';
+	Predis\Autoloader::register();
+	$client = new Predis\Client();
+  
+  
+  

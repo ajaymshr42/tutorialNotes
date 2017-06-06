@@ -1,0 +1,21 @@
+
+to suppress optiona statements while execution use 
+
+
+spark = SparkSession.builder.getOrCreate()
+spark.sparkContext.setLogLevel('ERROR')
+
+also untested use 
+
+import org.apache.log4j.Logger
+import org.apache.log4j.Level
+
+Logger.getLogger("org").setLevel(Level.OFF)
+Logger.getLogger("akka").setLevel(Level.OFF)
+
+
+
+or use 
+
+
+sparkContext.setLogLevel("OFF")

@@ -1,0 +1,91 @@
+#installing specific version of selenium ie selenium 2.53.0 using command
+
+#reference link
+
+#https://realpython.com/blog/python/headless-selenium-testing-with-python-and-phantomjs/
+pip install selenium==2.53.0
+
+#copy this script into install_phatomjs.sh file , change mode to +x and execute to  install phantomjs headless browser
+
+// copy script from down below
+
+
+
+#!/usr/bin/env bash
+# This script install PhantomJS in your Debian/Ubuntu System
+#
+# This script must be run as root:
+# sudo sh install_phantomjs.sh
+#
+
+if [[ $EUID -ne 0 ]]; then
+	echo "This script must be run as root" 1>&2
+	exit 1
+fi
+
+PHANTOM_VERSION="phantomjs-1.9.8"
+ARCH=$(uname -m)
+
+if ! [ $ARCH = "x86_64" ]; then
+	$ARCH="i686"
+fi
+
+PHANTOM_JS="$PHANTOM_VERSION-linux-$ARCH"
+
+sudo apt-get update
+sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y
+sudo apt-get install libfreetype6 libfreetype6-dev -y
+sudo apt-get install libfontconfig1 libfontconfig1-dev -y
+
+cd ~
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+sudo tar xvjf $PHANTOM_JS.tar.bz2
+
+sudo mv $PHANTOM_JS /usr/local/share
+sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+
+
+// script ends above 
+
+
+
+
+# installing google chrome headless browser
+
+
+https://chromedriver.storage.googleapis.com/index.html?path=2.27/
+
+# go to above link download chromedriver and install for sspecific machine alsso look out for newer version on 
+
+https://sites.google.com/a/chromium.org/chromedriver/downloads
+
+
+
+
+We have installed Successfully
+
+sudo apt-get install unzip
+wget -N http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip -P ~/Downloads
+unzip ~/Downloads/chromedriver_linux64.zip -d ~/Downloads
+chmod +x ~/Downloads/chromedriver
+sudo mv -f ~/Downloads/chromedriver /usr/local/share/chromedriver
+Change the directory to /usr/bin/chromedriver
+sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+
+
+#or simply just put it crhomedriver &&& geckodriver file inside 
+
+/usr/local/bin 
+
+and they will automatically will start working ,,,,,, you dont have to worry about it
+
+
+#also to maintain good list of fake proper user agent strings to be set inside the driver use fake_useragent
+#refer link 
+https://pypi.python.org/pypi/fake-useragent
+pip install fake-useragent
+
+
+
+

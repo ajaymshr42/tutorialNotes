@@ -1,0 +1,29 @@
+aws emr create-cluster --release-label emr-5.2.0 --name 'BigData Cluster' --applications Name=Hadoop Name=Hive Name=Spark Name=Pig Name=Tez Name=Ganglia Name=Presto --ec2-attributes KeyName=aws_spark,InstanceProfile=EMR_EC2_DefaultRole --service-role EMR_DefaultRole --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=c3.2xlarge --region ap-southeast-1 --log-uri s3://aws-logs-993183203787-ap-southeast-1/elasticmapreduce/ --bootstrap-actions Name='Install Jupyter notebook',Path="
+
+s3://aws-bigdata-blog/artifacts/aws-blog-emr-jupyter/install-jupyter-emr5.sh
+
+",Args=[
+
+--r,--julia,--toree,--torch,--ruby,--ds-packages,--ml-packages,--python-packages,'ggplot nilearn',--port,8880,--password,jupyter,--jupyterhub,--jupyterhub-port,8001,--cached-install
+
+,--notebook-dir,s3://bigdata.bucket/notebooks/,--copy-samples]
+
+
+# Jupyter Notebook Config
+
+c.NotebookApp.open_browser = False
+c.NotebookApp.ip='*'
+c.NotebookApp.port = 8888
+c.NotebookApp.token = u''
+c.Authenticator.admin_users = {'hadoop'}
+c.LocalAuthenticator.create_system_users = True
+
+
+# to start notebook
+
+
+PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark
+
+
+
+
