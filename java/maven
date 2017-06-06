@@ -1,6 +1,0 @@
-maven project creation command line command
-insert the name of packaging at groupId as com.package.name
-insert name of project at artifactId
-
-mvn archetype:generate -DgroupId=com.neutrino.api -DartifactId=MultiRequest -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-
