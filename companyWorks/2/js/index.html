@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Demo for Murmurhash version 3 (128 bit and 32 bit)
+	</title>
+</head>
+<body>
+
+
+
+
+<script type="text/javascript" src="murmur3.js"></script>
+<script type="text/javascript">
+	var seed = 0;
+
+	var rawKey = "imp_"+new Date().getTime()+"_"+Math.random(0,100000000000000);
+    var byteView = new Int8Array(rawKey);
+    byteView[0] = 0xDE; byteView[1] = 0xAD; byteView[2] = 0xBE; byteView[3] = 0xEF;
+    byteView[4] = 0xFE; byteView[5] = 0xED; byteView[6] = 0xFA; byteView[7] = 0xCE;
+	console.log(new Murmur3().hash128(rawKey, seed));
+
+</script>
+</body>
+</html>
