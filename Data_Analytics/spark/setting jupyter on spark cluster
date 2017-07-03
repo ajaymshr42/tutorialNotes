@@ -70,6 +70,8 @@ PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 # now execute from command line 
 PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark
 
+PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook --allow-root" pyspark
+
 
 # you are good to go using pyspark as instance inside jupyter notebook in browser
 
