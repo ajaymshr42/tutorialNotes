@@ -1,3 +1,72 @@
 link 1 try to install 
 
 https://medium.com/@ivanermilov/setting-up-hadoop-spark-hive-development-environment-on-ubuntu-94f0f8166ef1#.6lcopaw2y
+
+
+
+#  Setting up Hadoop/Spark/Hive development environment on Ubuntu
+
+
+What I want from development setup is:
+
+    1.It should be portable. 
+    2.I install it in a directory, then remove it at one point and forget about it. No apt-get, no packages.
+    3.I can reinstall it any number of times in different directories on my PC. And it should not take much time (and no effort).
+     All the binaries (hadoop, spark-submit etc.) should be available from a terminal session, but only if I work on a Spark project. Something similar to virtualenv in Python.
+    4.A memo of the commands in one place, that can  start pyspark shell or Hive beeline client.
+    
+What I created was a Makefile to install everything into one folder. It is available on the Github. 
+For the full installation instructions, please read README.md, 
+I will put the commands here which you need to run to install the environment
+
+mkdir -p ~/Workspace/hadoop-spark-hive && cd ~/Workspace/hadoop-spark-hive
+git clone https://github.com/earthquakesan/hdfs-spark-hive-dev-setup ./
+make download
+make configure
+
+
+And then you can run start Hadoop/Spark with:
+
+make start_hadoop
+make start_spark
+
+Check Hadoop at http://localhost:50070 (one datanode should be available), 
+Spark at http://localhost:8080 (one spark worker should be available) and Hive with
+
+#Hive configuration requires Hadoop/HDFS running
+
+make configure_hive
+make start_hive_server
+
+#In another terminal start beeline client
+
+make start_hive_beeline_client
+
+Then throw these queries into the client:
+
+CREATE TABLE pokes (foo INT, bar STRING);
+LOAD DATA LOCAL INPATH './tools/apache-hive-2.1.0-bin/examples/files/kv1.txt' OVERWRITE INTO TABLE pokes;
+DESCRIBE pokes;
+SELECT * FROM pokes;
+
+
+ you’ve got no error messages, congratulations — it works!
+
+Ok, now the fun part. To start Python interactive shell:
+
+make pyspark
+
+
+To start Scala interactive shell:
+
+make spark_shell
+
+To export Hadoop/Spark/Hive binaries to your PATH:
+
+make activate
+source activate
+
+
+
+
+
