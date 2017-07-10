@@ -22,6 +22,15 @@ if [ $p_ver -ne 2 ]; then
 else
 	echo "Python version is 2";
 fi;
+if [ $JAVA_HOME -eq '' ]; then
+	add-apt-repository ppa:webupd8team/java
+	apt-get update
+	apt-get install oracle-java8-installer
+	echo "
+/$JAVA_HOME=/usr/lib/jvm/java-8-oracle
+	" >> ~/.bashrc
+	source ~/.bashrc
+fi;
 
 if [[ $SPARK_HOME == '' ]]; then
 	echo "Installing Spark please wait .............";
@@ -40,14 +49,16 @@ if [[ $SPARK_HOME == '' ]]; then
 		mv spark /usr/local
 
 		echo "
-			export SPARK_HOME=/usr/local/spark
-			export PATH=$PATH:$SPARK_HOME/bin
+export SPARK_HOME=/usr/local/spark
+export PATH=\$PATH:\$SPARK_HOME/bin
 		"  >> ~/.bashrc
 
 		source ~/.bashrc
 
+		rm aws-java-sdk-1.7.4.jar
 		wget http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
 		mv aws-java-sdk-1.7.4.jar $SPARK_HOME/jars
+		hadoop-aws-2.7.3.jar
 		wget http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar
 		mv hadoop-aws-2.7.3.jar $SPARK_HOME/jars
 
@@ -78,15 +89,13 @@ if [[ $SPARK_HOME == '' ]]; then
 		touch $SPARK_HOME/conf/spark-env.sh
 
 		echo "
-			export SPARK_WORKER_INSTANCES=9
-			export SPARK_WORKER_MEMORY=6G
-			export SPARK_WORKER_CORES=32
-			
-			export SPARK_EXECUTOR_INSTANCES=9
-			export SPARK_EXECUTOR_MEMORY=5700M
-			export SPARK_EXECUTOR_CORES=32
-			
-			export SPARK_MASTER_IP= $ip
+export SPARK_WORKER_INSTANCES=9
+export SPARK_WORKER_MEMORY=6G
+export SPARK_WORKER_CORES=32
+export SPARK_EXECUTOR_INSTANCES=9
+export SPARK_EXECUTOR_MEMORY=5700M
+export SPARK_EXECUTOR_CORES=32
+export SPARK_MASTER_IP= $ip
 		"  >> $SPARK_HOME/conf/spark-env.sh
 
 
@@ -104,19 +113,18 @@ if [[ $SPARK_HOME == '' ]]; then
 		#nano ~/.jupyter/jupyter_notebook_config.py
 
 		echo "
-		c.NotebookApp.ip = '*'
-		c.NotebookApp.port = 8888
-		c.NotebookApp.open_browser = False
-		c.NotebookApp.token = ''
-		c.NotebookApp.password= ''
-		c.LocalAuthenticator.create_system_users = True
+c.NotebookApp.ip = '*'
+c.NotebookApp.port = 8888
+c.NotebookApp.open_browser = False
+c.NotebookApp.token = ''
+c.NotebookApp.password= ''
+c.LocalAuthenticator.create_system_users = True
 		" >> ~/.jupyter/jupyter_notebook_config.py
 
 	else
 		echo "Please provide a valid Master IP to save yourself pain of setting it Later. Ciao!";
 	fi;
 
-		
 else
 	echo "Spark already installed and running............";
 fi;
