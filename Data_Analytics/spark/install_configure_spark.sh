@@ -11,7 +11,7 @@
 
 p_ver=$(python -c "import sys; print sys.version_info[:][0]")
 
-echo "Python version is $p_ver";
+# echo "Python version is $p_ver";
 
 
 if [ $p_ver -ne 2 ]; then
@@ -25,20 +25,21 @@ fi;
 
 if [[ $SPARK_HOME == '' ]]; then
 	echo "Installing Spark please wait .............";
+	rm -rf /usr/local/spark
+	pip install --upgrade pip
 	if [ $# -eq 1 ];then
 
 		echo "Ok Mater IP is provided";
 		ip=$@
 
 		wget https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
-		tar -zxvf https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
+		tar xvf spark-2.1.1-bin-hadoop2.7.tgz
+		rm spark-2.1.1-bin-hadoop2.7.tgz
 		mv spark-2.1.1-bin-hadoop2.7 spark
 
 		mv spark /usr/local
 
-
 		echo "
-			
 			export SPARK_HOME=/usr/local/spark
 			export PATH=$PATH:$SPARK_HOME/bin
 		"  >> ~/.bashrc
@@ -46,9 +47,9 @@ if [[ $SPARK_HOME == '' ]]; then
 		source ~/.bashrc
 
 		wget http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
-		mv aws-java-sdk-1.7.4.jar $SPARK_HOME/jars/
+		mv aws-java-sdk-1.7.4.jar $SPARK_HOME/jars
 		wget http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar
-		mv hadoop-aws-2.7.3.jar $SPARK_HOME/jars/
+		mv hadoop-aws-2.7.3.jar $SPARK_HOME/jars
 
 
 		## begin with spark-defaults settings
@@ -56,7 +57,6 @@ if [[ $SPARK_HOME == '' ]]; then
 		echo "
 			spark.driver.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
 			spark.executor.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
-
 			spark.hadoop.fs.s3a.impl        org.apache.hadoop.fs.s3a.S3AFileSystem
 			spark.hadoop.fs.s3a.access.key  AKIAJM7PY4JDECMVU2EA
 			spark.hadoop.fs.s3a.secret.key  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
@@ -65,7 +65,6 @@ if [[ $SPARK_HOME == '' ]]; then
 			spark.hadoop.fs.s3n.secret.key  uVsJwLkHFRU8qKtzvNwDSZxPw5yC/68odIltawNt
 			spark.hadoop.fs.s3.access.key  AKIAJM7PY4JDECMVU2EA
 			spark.hadoop.fs.s3.secret.key  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
-
 			spark.serializer                   org.apache.spark.serializer.KryoSerializer
 			spark.shuffle.manager              SORT
 			spark.shuffle.consolidateFiles     true
@@ -102,17 +101,16 @@ if [[ $SPARK_HOME == '' ]]; then
 
 		jupyter notebook --generate-config --allow-root
 
-		nano ~/.jupyter/jupyter_notebook_config.py
+		#nano ~/.jupyter/jupyter_notebook_config.py
 
 		echo "
-
 		c.NotebookApp.ip = '*'
 		c.NotebookApp.port = 8888
 		c.NotebookApp.open_browser = False
 		c.NotebookApp.token = ''
 		c.NotebookApp.password= ''
 		c.LocalAuthenticator.create_system_users = True
-		" > ~/.jupyter/jupyter_notebook_config.py
+		" >> ~/.jupyter/jupyter_notebook_config.py
 
 	else
 		echo "Please provide a valid Master IP to save yourself pain of setting it Later. Ciao!";
@@ -122,5 +120,3 @@ if [[ $SPARK_HOME == '' ]]; then
 else
 	echo "Spark already installed and running............";
 fi;
-
-	
