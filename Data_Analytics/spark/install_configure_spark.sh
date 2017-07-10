@@ -66,23 +66,23 @@ export PATH=\$PATH:\$SPARK_HOME/bin
 		## begin with spark-defaults settings
 		touch $SPARK_HOME/conf/spark-defaults.conf
 		echo "
-			spark.driver.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
-			spark.executor.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
-			spark.hadoop.fs.s3a.impl        org.apache.hadoop.fs.s3a.S3AFileSystem
-			spark.hadoop.fs.s3a.access.key  AKIAJM7PY4JDECMVU2EA
-			spark.hadoop.fs.s3a.secret.key  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
-			spark.hadoop.fs.s3a.experimental.input.fadvise random
-			spark.hadoop.fs.s3n.access.key  AKIAJM7PY4JDECMVU2EA
-			spark.hadoop.fs.s3n.secret.key  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
-			spark.hadoop.fs.s3.access.key  AKIAJM7PY4JDECMVU2EA
-			spark.hadoop.fs.s3.secret.key  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
-			spark.serializer                   org.apache.spark.serializer.KryoSerializer
-			spark.shuffle.manager              SORT
-			spark.shuffle.consolidateFiles     true
-			spark.shuffle.spill                true
-			spark.shuffle.spill.compress       false
-			spark.shuffle.compress             true
-			spark.io.compression.codec         snappy
+spark.driver.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
+spark.executor.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
+spark.hadoop.fs.s3a.impl        org.apache.hadoop.fs.s3a.S3AFileSystem
+spark.hadoop.fs.s3a.access.key  AKIAJM7PY4JDECMVU2EA
+spark.hadoop.fs.s3a.secret.key  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
+spark.hadoop.fs.s3a.experimental.input.fadvise random
+spark.hadoop.fs.s3n.access.key  AKIAJM7PY4JDECMVU2EA
+spark.hadoop.fs.s3n.secret.key  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
+spark.hadoop.fs.s3.access.key  AKIAJM7PY4JDECMVU2EA
+spark.hadoop.fs.s3.secret.key  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
+spark.serializer                   org.apache.spark.serializer.KryoSerializer
+spark.shuffle.manager              SORT
+spark.shuffle.consolidateFiles     true
+spark.shuffle.spill                true
+spark.shuffle.spill.compress       false
+spark.shuffle.compress             true
+spark.io.compression.codec         snappy
 		"  >> $SPARK_HOME/conf/spark-defaults.conf
 
 		## begin with spark-env settings
