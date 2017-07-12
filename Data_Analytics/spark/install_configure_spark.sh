@@ -30,7 +30,7 @@ if [ $JAVA_HOME -eq '' ]; then
 	apt-get update
 	apt-get install oracle-java8-installer
 	echo "
-/$JAVA_HOME=/usr/lib/jvm/java-8-oracle
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
 	" >> ~/.bashrc
 	source ~/.bashrc
 fi;
