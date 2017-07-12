@@ -10,6 +10,7 @@
 #### ****** master host ip
 
 apt-get install python
+apt-get install software-properties-common
 p_ver=$(python -c "import sys; print sys.version_info[:][0]")
 
 # echo "Python version is $p_ver";
