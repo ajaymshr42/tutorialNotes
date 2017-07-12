@@ -9,10 +9,12 @@
 #### ****** Command Line options include (in order)
 #### ****** master host ip
 
+apt-get install python
 p_ver=$(python -c "import sys; print sys.version_info[:][0]")
 
 # echo "Python version is $p_ver";
-
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
 
 if [ $p_ver -ne 2 ]; then
 	echo "Python version is not ";
