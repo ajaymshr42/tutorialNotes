@@ -1,3 +1,5 @@
+if java 8 is not getting installed in Ubuntu 16.04 / its oracle side problem and its temporary fix here
+
 switch to dpkg directory cd /var/lib/dpkg/info
 
 Then run following commands :-
