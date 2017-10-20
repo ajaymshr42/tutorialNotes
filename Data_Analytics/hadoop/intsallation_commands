@@ -1,0 +1,90 @@
+prefferably create a new user and create its ssh access to localhost
+
+https://archive.apache.org/dist/hadoop/core/hadoop-3.0.0-beta1/
+
+Download latest Hadoop.tar.gz(not the src one)
+
+unzip and move to desired folder 
+
+add this to .bashrc
+
+export HADOOP_HOME=/home/hadoop/hadoop
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+add to hadoop-env.sh
+
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
+
+yarn-site.xml
+
+<configuration>
+
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+
+</configuration>
+
+hdfs-site.xml
+
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+
+</configuration>
+
+
+mapred-site.xml
+
+<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+
+
+core-site.xml
+
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://localhost:9000</value>
+	</property>
+</configuration>
+
+
+
+
+
+
+finally check my running 
+
+
+hdfs namenode -format
+
+start-dfs.sh
+
+start-yarn.sh
+
+stop-all.sh
+
+
+in hadoop 3.0 onwards port 50070 is shifted to 9870 
+
+also if datanode is not starting , or getting datastrea error must delete all dfs files corresponding to user in 
+
+rm -rf /tmp/hadoop-<username>/*
+
+http://localhost:8088/cluster
+
