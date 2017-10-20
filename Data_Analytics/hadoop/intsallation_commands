@@ -1,5 +1,6 @@
 prefferably create a new user and create its ssh access to localhost
 
+https://archive.apache.org/dist/hadoop/core/hadoop-3.0.0-beta1/
 
 Download latest Hadoop.tar.gz(not the src one)
 
@@ -78,4 +79,12 @@ start-yarn.sh
 
 stop-all.sh
 
+
+in hadoop 3.0 onwards port 50070 is shifted to 9870 
+
+also if datanode is not starting , or getting datastrea error must delete all dfs files corresponding to user in 
+
+rm -rf /tmp/hadoop-<username>/*
+
+http://localhost:8088/cluster
 
