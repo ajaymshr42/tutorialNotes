@@ -1,4 +1,7 @@
 
+#### Master Setup ####
+
+#### Or maybe only setup that you will need to do if you are using single node ####
 
 1. Make sure you have Java installed ( if not refer to JAVA Installation page in JAVA folder) and Download the latest version of Spark 
     From Official Website (spark-version.tar.gz)
