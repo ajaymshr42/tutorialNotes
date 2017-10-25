@@ -1,0 +1,99 @@
+
+
+1. Make sure you have Java installed ( if not refer to JAVA Installation page in JAVA folder) and Download the latest version of Spark 
+    From Official Website (spark-version.tar.gz)
+2. Extract it  ( tar xzf spark-version.tar.gz)
+3. move the folder to proper destination so that it is accessible easily or keep it according to convenience
+      my preference is " /usr/local/ " folder
+      
+4. add it to Environment Variable ( .bashrc file ) using your preffered editor , so that spark-submit command is accessible to each user
+
+      eg.  
+           export SPARK_HOME=/usr/local/spark
+           export PATH=$PATH:$SPARK_HOME/bin
+           
+5. restart terminal or execute " source ~/.bashrc" for command to be available system wide
+
+ #### OPTIONAL STEPS ( only needed if you are not using AWS Services) eg. Local Machine , Rented Server from some vendor ####
+ #### Only Required if you need to " ACCESS AWS S3 "  ####
+ #### To enable this make sure you have AWS-CLI installed and configured ####
+
+6. First we need a " aws-java-sdk " , so that we have made aws services accessible to Spark , for this move the sdk file to sparks jar
+    folder
+      eg.
+          wget http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
+          mv aws-java-sdk-1.7.4.jar $SPARK_HOME/jars
+          
+7. Second you need to make S3 available as HDFS to Spark, for that you need " hadoop-aws " and move to jar folder too.
+      eg. 
+          wget http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar
+          mv hadoop-aws-2.7.3.jar $SPARK_HOME/jars
+
+8. Finally you need to edit " $SPARK_HOME/conf/spark-defaults.conf " in order to make spark see this changes.
+ eg.
+ 
+          # Jar file location to make use of this files and access S3
+          spark.driver.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
+          spark.executor.extraClassPath  $SPARK_HOME/jars/aws-java-sdk-1.7.4.jar:$SPARK_HOME/jars/hadoop-aws-2.7.3.jar
+
+          # S3 Advanced protocol setup , new protocol , better performance and more access capacity
+          spark.hadoop.fs.s3a.impl        org.apache.hadoop.fs.s3a.S3AFileSystem
+          spark.hadoop.fs.s3a.access.key  AKIAJM7PY4JDECMVU2EA
+          spark.hadoop.fs.s3a.secret.key  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
+          spark.hadoop.fs.s3a.experimental.input.fadvise random
+
+          # S3 Native protocol setup , old protocol , less access capacity but good for in hurry setup and testing whether S3 is accessible or not
+          spark.hadoop.fs.s3n.access.key  AKIAJM7PY4JDECMVU2EA
+          spark.hadoop.fs.s3n.secret.key  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
+
+This will make the spark access S3 buckets, files and etc. 
+
+#### End of Optional Setup ####
+
+8. Now you need to specify worker number and sizes.  Edit this file  " $SPARK_HOME/conf/spark-env.sh " . Some common and simple settings are
+        eg.
+            export SPARK_WORKER_INSTANCES=2
+            export SPARK_WORKER_MEMORY=6G
+            export SPARK_WORKER_CORES=2
+            export SPARK_EXECUTOR_INSTANCES=2
+            export SPARK_EXECUTOR_MEMORY=5700M
+            export SPARK_EXECUTOR_CORES=2
+            export SPARK_MASTER_IP= $ip
+9. Now you can also edit the  " $SPARK_HOME/conf/spark-defaults.conf " file , if you need to do some essential settings to increase
+    Spark Performance.
+        eg.
+            spark.serializer                   org.apache.spark.serializer.KryoSerializer
+            spark.shuffle.manager              SORT
+            spark.shuffle.consolidateFiles     true
+            spark.shuffle.spill                true
+            spark.shuffle.spill.compress       false
+            spark.shuffle.compress             true
+            spark.io.compression.codec         snappy
+            
+            
+10. check sbin folder in spark , where you would get start-all.sh and stop-all.sh which are used to starting and stoping master 
+    and slaves.
+    
+ #### For Slaves setup #####
+ 
+1. Follow exact same steps from 1-9 of standalone master Setup but only when providing $ip in step 8 provide Master IP not Slave IP.
+    eg.  There could be 3 IP which are 4.3.2.1 , 4.3.2.2 , 4.3.2.3 out of which 4.3.2.1 is the one we want to be master so we will provide 
+    this IP as Master IP in every single node in CLuster.
+ 
+2. You need to create Unrestricted access from Master to Slave in order to make them accessible from Master without key or passwords.
+    ### Follow Below steps for each  ###
+    
+    ### Suppose we want to machine A to access Machine B without any key or password ###
+    
+    ### at A ###
+    ssh-keygen -t rsa     # this command generates a public and private key pair in ~/.ssh folder
+    cat .ssh/id_rsa.pub | ssh localhost@B 'cat >> .ssh/authorized_keys'   # this command adds A to be authorized Access member of B
+   
+   next time you will be able to access B from A without any password
+   
+3. Add IP of each slave in Master's  " $SPARK_HOME/conf/slaves " file.
+
+    eg.
+      localhost
+      192.168.0.1
+
