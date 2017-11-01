@@ -167,7 +167,7 @@ echo "
 install.packages(c("dplyr","ggplot2","tseries","forecast","Metrics","fitdistrplus","e1071","xts","data.table","zoo","sqldf","Hmisc","memisc","doBy"),repos="https://cran.ism.ac.jp/")
 install.packages(c("devtools","nnet","neuralnet","rpart","slines","parallel","rjson","mice","tensorflow","DMwR","pracma","caret","randomForest","deepnet","gbm","h2o","foreach","kernlab","RJDBC"),repos="https://cran.ism.ac.jp/")
 " >> install_r_ds_packages.r
-Rscript install_r_ds_packages.r >> $no_error
+Rscript install_r_ds_packages.r
 # installing python dependencies and packages
 pip install tensorflow tensorflow-gpu pandas sklearn numpy scipy matplotlib
 
