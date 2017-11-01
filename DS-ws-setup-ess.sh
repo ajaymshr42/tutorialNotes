@@ -183,6 +183,7 @@ else
 	echo "Spark is already installed"
 fi
 
+SPARK_HOME=$spark_dir_path$spark_dir_default_name
 sudo chmod -R a+rwX $SPARK_HOME/
 
 touch "$SPARK_HOME/$spark_default_conf_file_name" >> $no_error
