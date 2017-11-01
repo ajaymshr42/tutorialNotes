@@ -147,8 +147,8 @@ fi
 # doing configuration of jupyter notebook
 # refer WIKI page for config details
 # since all users will access and modify settings at some points , we want every user to have full access to this folder
-sudo chmod -R $full_access_code $jupyter_dir
 jupyter notebook --generate-config -y
+sudo chmod -R $full_access_code $jupyter_dir
 echo "
 c.NotebookApp.ip = '*'   
 c.NotebookApp.port = $jupyter_launch_port
