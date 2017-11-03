@@ -157,16 +157,16 @@ c.NotebookApp.token = ''
 " >> $jupyter_dir/jupyter_notebook_config.py
 
 # installing python virtual env which is dependency for few packages
-apt-get install python-virtualenv >> $no_error
-pip install virtualenv >> $no_error
+
+pip install virtualenv 
 
 # installing Dependencies of R and Python
 # install.packages(c("dplyr","ggplot2","tseries","forecast","Metrics","fitdistrplus","e1071","xts","data.table","zoo","sqldf","Hmisc","memisc","doBy"),repos="https://cran.ism.ac.jp/")
 # install.packages(c("devtools","nnet","neuralnet","rpart","slines","parallel","rjson","mice","tensorflow","DMwR","pracma","caret","randomForest","deepnet","gbm","h2o","foreach","kernlab","RJDBC"),repos="https://cran.ism.ac.jp/")
 # installing R packages and R kernel for jupyter
 echo "
-install.packages(c("dplyr","ggplot2","tseries","forecast","Metrics","fitdistrplus","e1071","xts","data.table","zoo","sqldf","Hmisc","memisc","doBy"),repos="https://cran.ism.ac.jp/")
-install.packages(c("devtools","nnet","neuralnet","rpart","slines","parallel","rjson","mice","tensorflow","DMwR","pracma","caret","randomForest","deepnet","gbm","h2o","foreach","kernlab","RJDBC"),repos="https://cran.ism.ac.jp/")
+install.packages(c('dplyr','ggplot2','tseries','forecast','Metrics','fitdistrplus','e1071','xts','data.table','zoo','sqldf','Hmisc','memisc','doBy'),repos='https://cran.ism.ac.jp/')
+install.packages(c('devtools','nnet','neuralnet','rpart','slines','parallel','rjson','mice','tensorflow','DMwR','pracma','caret','randomForest','deepnet','gbm','h2o','foreach','kernlab','RJDBC'),repos='https://cran.ism.ac.jp/')
 devtools::install_github('IRkernel/IRkernel')
 IRkernel::installspec()
 " >> install_r_ds_packages.r
