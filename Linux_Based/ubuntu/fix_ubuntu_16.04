@@ -1,0 +1,14 @@
+overheating problem is due to Graphics problems
+
+fix overheating by reducing fan spead using 
+
+sudo apt install nvidia-361 nvidia-prime
+
+restart
+
+sudo prime-select intel
+
+
+fix graphics problems using
+
+
