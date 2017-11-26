@@ -181,7 +181,7 @@ Rscript install_r_ds_packages.r
 pip install tensorflow tensorflow-gpu pandas sklearn numpy scipy matplotlib
 
 
-
+touch $user_home/$env_var_file
 # installing spark 
 spark_presense=$(command -v spark-submit)
 if [[ $spark_presense == '' ]]; then
