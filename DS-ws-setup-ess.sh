@@ -18,7 +18,7 @@ AWS_SECRET_KEY='put your secret key here'
 # must change if different config
 env_var_file='.bashrc'
 master_ip='127.0.0.1'
-user_home='/home/ajay'
+user_home='/root'
 machine_cpu_size=64
 
 # files to support S3 access from cluster , change only when new version is been tested properly
