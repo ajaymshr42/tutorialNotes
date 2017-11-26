@@ -42,7 +42,9 @@ preffred_python_version_major=2
 spark_download_url='https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz'
 spark_dir_default_name='spark'
 # for installation prefer WIKI page for spark standalone setup
-
+# r server download url
+rServerDownloadUrl='https://download2.rstudio.org/rstudio-server-1.1.383-i386.deb'
+rServerVersion=$(echo $rServerDownloadUrl | sed 's#.*/##')
 # do not disturb settings
 spark_zip_file_name=$(echo $spark_download_url | sed 's#.*/##')
 no_error=/dev/null
@@ -120,6 +122,10 @@ else
 	echo "R is already installed with $(R --version) version"
 fi
 
+# installing r server
+sudo apt-get install gdebi-core -y
+wget $rServerDownloadUrl
+sudo gdebi $rServerVersion -y
 # installing Java
 java_presense=$(command -v java)
 if [[ $java_presense == '' ]]; then
