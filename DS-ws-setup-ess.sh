@@ -125,7 +125,7 @@ fi
 # installing r server
 sudo apt-get install gdebi-core -y
 wget $rServerDownloadUrl
-sudo gdebi $rServerVersion -y
+sudo gdebi rstudio-server-1.1.383-i386.deb
 # installing Java
 java_presense=$(command -v java)
 if [[ $java_presense == '' ]]; then
