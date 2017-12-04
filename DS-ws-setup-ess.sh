@@ -160,6 +160,7 @@ c.NotebookApp.ip = '*'
 c.NotebookApp.port = $jupyter_launch_port
 c.NotebookApp.open_browser = False
 c.NotebookApp.token = ''
+c.NotebookApp.allow_root = True
 " >> $jupyter_dir/jupyter_notebook_config.py
 
 # installing python virtual env which is dependency for few packages
