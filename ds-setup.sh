@@ -1,0 +1,87 @@
+sudo apt-get update
+sudo apt-get install default-jdk -y
+sudo apt-get install python-dev -y
+wget  https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip install jupyter virtualenv tensorflow tensorflow-gpu pandas numpy scipy sklearn findspark matplotlib
+sudo apt-get remove openssh-client openssh-server -y
+sudo apt-get install openssh-client openssh-server -y
+jupyter notebook --generate-config
+echo "c.NotebookApp.ip = '*'
+c.NotebookApp.port = 9999
+c.NotebookApp.open_browser = False
+c.NotebookApp.token = ''
+c.NotebookApp.allow_root = True" >> /root/.jupyter/jupyter_notebook_config.py
+wget https://d3kbcqa49mib13.cloudfront.net/spark-2.1.1-bin-hadoop2.7.tgz
+tar -xzf spark-2.1.1-bin-hadoop2.7.tgz
+mv spark-2.1.1-bin-hadoop2.7 spark
+wget http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar 
+wget http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar
+mv aws-java-sdk-1.7.4.jar hadoop-aws-2.7.3.jar spark/jars/
+touch spark-defaults.conf spark-env.sh log4j.properties
+echo "
+spark.driver.extraClassPath  /usr/local/spark/jars/aws-java-sdk-1.7.4.jar:/usr/local/spark/jars/hadoop-aws-2.7.3.jar
+spark.executor.extraClassPath  /usr/local/spark/jars/aws-java-sdk-1.7.4.jar:/usr/local/spark/jars/hadoop-aws-2.7.3.jar
+spark.hadoop.fs.s3a.impl        org.apache.hadoop.fs.s3a.S3AFileSystem
+spark.hadoop.fs.s3a.access.key  AKIAJ6AM2CPS65JHTFXA
+spark.hadoop.fs.s3a.secret.key  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
+spark.hadoop.fs.s3a.experimental.input.fadvise random
+spark.hadoop.fs.s3n.access.key  AKIAJ6AM2CPS65JHTFXA
+spark.hadoop.fs.s3n.secret.key  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
+spark.hadoop.fs.s3.access.key  AKIAJ6AM2CPS65JHTFXA
+spark.hadoop.fs.s3.secret.key  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
+spark.serializer                   org.apache.spark.serializer.KryoSerializer
+spark.shuffle.manager              SORT
+spark.cores.max
+spark.deploy.defaultCores 14
+" > spark-defaults.conf
+echo "
+export SPARK_WORKER_INSTANCES=7
+export SPARK_WORKER_MEMORY=8G
+export SPARK_WORKER_CORES=4
+export SPARK_EXECUTOR_INSTANCES=7
+export SPARK_EXECUTOR_MEMORY=8G
+export SPARK_EXECUTOR_CORES=4
+export SPARK_MASTER_IP=127.0.0.1
+" > spark-env.sh
+chmod +x spark-env.sh
+echo "
+log4j.rootCategory=WARN, console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.target=System.err
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n
+# Set the default spark-shell log level to WARN. When running the spark-shell, the
+# log level for this class is used to overwrite the root logger's log level, so that
+# the user can have different defaults for the shell and regular Spark apps.
+log4j.logger.org.apache.spark.repl.Main=WARN
+# Settings to quiet third party logs that are too verbose
+log4j.logger.org.spark_project.jetty=WARN
+log4j.logger.org.spark_project.jetty.util.component.AbstractLifeCycle=ERROR
+log4j.logger.org.apache.spark.repl.SparkIMain=INFO
+log4j.logger.org.apache.spark.repl.SparkILoop=INFO
+log4j.logger.org.apache.parquet=ERROR
+log4j.logger.parquet=ERROR
+# SPARK-9183: Settings to avoid annoying messages when looking up nonexistent UDFs in SparkSQL with Hive support
+log4j.logger.org.apache.hadoop.hive.metastore.RetryingHMSHandler=FATAL
+log4j.logger.org.apache.hadoop.hive.ql.exec.FunctionRegistry=ERROR
+" > log4j.properties
+mv spark-defaults.conf spark-env.sh log4j.properties spark/conf/
+mv spark /usr/local/
+echo SPARK_HOME=/usr/local/spark >> ~/.profile
+echo SPARK_HOME=/usr/local/spark >> ~/.bashrc
+echo PATH=$\PATH:$\SPARK_HOME/bin:$\SPARK_HOME/sbin >> .profile
+echo PATH=$\PATH:$\SPARK_HOME/bin:$\SPARK_HOME/sbin >> .bashrc
+ssh-keygen -t rsa -N '' -f /root/.ssh/id_rsa
+sudo apt-get install r-base -y
+sudo apt-get install gdebi -y
+wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb
+yes | gdebi rstudio-server-1.1.383-amd64.deb
+touch install_r_ds_packages.r
+echo "
+install.packages(c('dplyr','ggplot2','tseries','forecast','Metrics','fitdistrplus','e1071','xts','data.table','zoo','sqldf','Hmisc','memisc','doBy'),repos='https://cran.ism.ac.jp/')
+install.packages(c('devtools','nnet','neuralnet','rpart','slines','parallel','rjson','mice','tensorflow','DMwR','pracma','caret','randomForest','deepnet','gbm','h2o','foreach','kernlab','RJDBC'),repos='https://cran.ism.ac.jp/')
+devtools::install_github('IRkernel/IRkernel')
+IRkernel::installspec()
+" >> install_r_ds_packages.r
+Rscript install_r_ds_packages.r
