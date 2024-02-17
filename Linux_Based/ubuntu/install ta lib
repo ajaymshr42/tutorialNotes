@@ -1,0 +1,26 @@
+installing it can be  tricky as it requires separate compiler which requires few steps 
+
+ensure the folder where you are performing this does not contain spaces 
+
+then 
+
+
+
+LINUX
+Download ta-lib-0.4.0-src.tar.gz and:
+
+$ tar -xzf ta-lib-0.4.0-src.tar.gz
+$ cd ta-lib/
+$ ./configure --prefix=/usr
+$ make
+$ sudo make install
+If you build TA-Lib using make -jX it will fail but that's OK! Simply rerun make -jX followed by [sudo] make install.
+
+Note: if your directory path includes spaces, the installation will probably fail with No such file or directory errors.
+
+
+
+finally 
+
+
+pip install TA-Lib
